@@ -18,30 +18,22 @@ main {
 
 /* layout */
 /* small devices */
-.lw-5 {
-  width: 100%;
-}
-
-.lw-20 {
-  width: 100%;
-}
-
-.lw-25 {
-  width: 100%;
-}
-
-.lw-50 {
+.lw-3,
+.lw-19,
+.lw-25,
+.lw-50,
+.lw-100 {
   width: 100%;
 }
 
 /* large devices */
 @media (min-width: 992px) {
-  .lw-5 {
-    width: 5%;
+  .lw-3 {
+    width: 3%;
   }
 
-  .lw-20 {
-    width: 20%;
+  .lw-19 {
+    width: 19%;
   }
 
   .lw-25 {
@@ -51,6 +43,22 @@ main {
   .lw-50 {
     width: 50%;
   }
+}
+
+/* subject */
+.subject {
+  cursor: pointer;
+}
+
+.btn-triple {
+  width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.btn-triple-divider:not(:last-child):after {
+  content: ", ";
 }
 
 /* buttons */
@@ -123,9 +131,52 @@ main {
   font-size: 10px;
 }
 
-/* buttons */
 .btn-circle {
   border-radius: 50%;
+}
+
+/* buttons hover */
+.btn-texts:hover {
+  background-color: #1E4952;
+  color: #F8F9FA;
+}
+
+.btn-relations:hover {
+  background-color: #5C2E87;
+  color: #F8F9FA;
+}
+
+.btn-graph:hover {
+  background-color: #842823;
+  color: #F8F9FA;
+}
+
+.hamburger:hover {
+  background-color: white;
+  cursor: pointer;
+}
+
+/* background */
+.bg-rimini-water {
+  background-color: #2D7480;
+}
+
+/* lists */
+.offcanvas-body>.list-group>a.active {
+  background-color: #AE58FD;
+  border: 1px solid #AE58FD;
+}
+
+.bg-rimini-water li,
+.bg-rimini-water h3,
+.bg-rimini-water a {
+  color: #FFF;
+  text-decoration: none;
+}
+
+.bg-rimini-water a:hover {
+  color: #FFF;
+  text-decoration: underline;
 }
 
 /* scroll */
@@ -161,6 +212,10 @@ main {
 }
 
 /* cards */
+.card-w-500 {
+  max-width: 500px;
+}
+
 .card-45 {
   height: 45%;
 }
@@ -168,7 +223,7 @@ main {
 /* textarea */
 textarea {
   width: 100%;
-  height: 40vh;
+  height: 25vh;
 }
 
 /* arrow */
