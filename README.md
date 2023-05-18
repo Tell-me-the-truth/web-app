@@ -24,5 +24,5 @@ After installing the required packages:
 ```
 java -server -Xmx4g -jar blazegraph.jar
 ```
-- Upload your data following the [**Blazegraph Quick Start**](https://github.com/blazegraph/database/wiki/Quick_Start))
+- Upload your data following the [**Blazegraph Quick Start**](https://github.com/blazegraph/database/wiki/Quick_Start)
 - Open the application in your browser: **http://localhost:8000/**
