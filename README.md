@@ -12,7 +12,10 @@ The project works with this **requirement**:
 
 - [**Python**](https://www.python.org/downloads/) v3.6.3
 
-Packages can be installed by running **setup.sh**.
+Packages can be installed by running **setup.sh**:
+```
+sh setup.sh
+```
 
 After installing the required packages:
 
