@@ -19,10 +19,10 @@ sh setup.sh
 
 After installing the required packages:
 
-- Download **blazegraph.jar** to set the database: https://github.com/blazegraph/database/releases/tag/BLAZEGRAPH_2_1_6_RC
-- Run it locally:
+- Run **blazegraph.jar** locally:
 ```
+cd data
 java -server -Xmx4g -jar blazegraph.jar
 ```
-- Upload your data following the [**Blazegraph Quick Start**](https://github.com/blazegraph/database/wiki/Quick_Start)
+- Run **app.py**
 - Open the application in your browser: **http://localhost:8000/**
