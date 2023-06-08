@@ -17,12 +17,17 @@ Packages can be installed by running **setup.sh**:
 sh setup.sh
 ```
 
-After installing the required packages:
+After installing the required packages, install [**Blazegraph**](https://blazegraph.com/) locally:
 
-- Run **blazegraph.jar** locally:
+- Download [**blazegraph.jar**](https://github.com/blazegraph/database/releases/tag/BLAZEGRAPH_2_1_6_RC)
+- Create a new **folder** and rename it **data**
+- Put **blazegraph.jar in data** folder
+- From the terminal enter data and **run blazegraph.jar**:
 ```
 cd data
 java -server -Xmx4g -jar blazegraph.jar
 ```
+
+Finally run the application:
 - Run **app.py**
 - Open the application in your browser: **http://localhost:8000/**
