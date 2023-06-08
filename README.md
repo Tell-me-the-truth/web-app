@@ -30,4 +30,7 @@ java -server -Xmx4g -jar blazegraph.jar
 
 Finally run the application:
 - Run **app.py**
+```
+python3 app.py
+```
 - Open the application in your browser: **http://localhost:8000/**
