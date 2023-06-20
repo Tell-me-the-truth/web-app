@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   selectTripleComp();
   expandAbbreviations();
   rdfData();
+  confirmData();
 });
 
 /* check the width of device */
@@ -200,5 +201,25 @@ let rdfData = () => {
       };
 
     });
+  });
+};
+
+/* confirm data */
+let confirmData = () => {
+  var confirmBtn = document.querySelector(".btn-confirm");
+  confirmBtn.addEventListener("click", () => {
+    var subject = document.querySelector("[data-type='triple'][data-role='subject']").innerHTML;
+    var predicate = document.querySelector("[data-type='triple'][data-role='predicate']").innerHTML;
+    var object = document.querySelector("[data-type='triple'][data-role='object']").innerHTML;
+    if (subject !== "" && predicate !== "" && object !== "") {
+      let text = "Do you confirm this data?";
+      if (confirm(text) == true) {
+        alert("Data added to the knowledge base!")
+      } else {
+        prompt("What's wrong with these data?");
+      }
+    } else {
+      alert("Let's insert at least one subject, predicate, and object to confirm data.");
+    };
   });
 };
