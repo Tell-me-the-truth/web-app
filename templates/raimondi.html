@@ -143,7 +143,7 @@
           <div class="col-md-3 text-center">
             <!-- select the rdf serialization -->
             <div class="arrow mb-2">Predicate</div>
-            <select class="form-select form-select-sm select-predicate" aria-label=".form-select-sm">
+            <select class="form-select form-select-sm select-predicate" aria-label=".form-select-sm" data-triple="predicate">
               <option value="was_influenced_by">was_influenced_by</option>
             </select>
           </div> <!-- insert predicate -->
@@ -193,8 +193,13 @@
             <option selected>Turtle</option>
           </select>
           <!-- rdf result -->
-          <div class="res-section text-bg-light my-3 p-3 res-triple"> <!-- insert the rdf triple -->
-            @prefix ecrm: &#x3c;http://erlangen-crm.org/current/&#x3e; .
+          <div class="res-section text-bg-light my-3 p-3 res-triple">
+            <p data-type="triple" data-role="prefix">@prefix ecrm: &#x3c;http://erlangen-crm.org/current/&#x3e; .</p>
+            <p data-type="triple" data-role="subject"></p>
+            <p data-type="triple" data-role="predicate"></p>      
+            <p data-type="triple" data-role="object"></p>      
+            <!-- insert the rdf triple -->
+            <!-- @prefix ecrm: &#x3c;http://erlangen-crm.org/current/&#x3e; .
             &#x3c;https: //w3id.org/giuseppe-raimondi-lod/pub-text/mostro-a-due-teste-1971/creation&#x3e;
             ecrm:P15_was_influenced_by &#x3c;https: //w3id.org/giuseppe-raimondi-lod/pub-text/preface-1925&#x3e; .
             <br>
@@ -205,7 +210,7 @@
             Teste' (in «Commerce», 1925, n. 4). Supporting evidence for this connection is provided by the presence of
             handwritten annotations by Giuseppe Raimondi on his copy of the 'Préface' (BIFICLIT, FR PER COMMER 1925, p.
             100). Such annotations read 'Mostri, prodotti dei pensieri' and 'Idee mostri'. The article title 'Mostro a
-            due Teste' is a possible reworking of these notes."^^xsd:string .
+            due Teste' is a possible reworking of these notes."^^xsd:string . -->
           </div>
         </div>
       </div>

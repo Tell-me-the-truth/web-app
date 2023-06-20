@@ -33,12 +33,16 @@ let selectTripleComp = () => {
   /* object / array of bibl */
   var biblArr = [];
 
+  /* object / array of uri */
+  var uriArr = [];
+
   /* subject / object */
   var txts = document.querySelectorAll(".select-txt");
   txts.forEach((txt) => {
     txt.addEventListener(("click"), (e) => {
       /* data */
       var tripleRole = e.target.getAttribute("data-triple");
+      var uri = e.target.getAttribute("data-uri");
       var author = e.target.getAttribute("data-author");
       var title = e.target.getAttribute("data-title");
       var pubdate = e.target.getAttribute("data-dataPub");
@@ -49,48 +53,66 @@ let selectTripleComp = () => {
       tripleComps.forEach((comp) => {
 
         /* if object add/remove bibl from array because of checkbox */
+        /* OBJECT */
         if (comp.classList.contains("object")) {
 
           /* add checked texts to array */
           if (e.target.checked) {
+            /* bibl */
             if (!biblArr.includes(biblStr)) {
               biblArr.push(biblStr);
             };
+
+            /* uri */
+            if (!uriArr.includes(uri)) {
+              uriArr.push(uri);
+            };
           } else {
+            /* bibl */
             if (biblArr.includes(biblStr)) {
               const index = biblArr.indexOf(biblStr);
               if (index > -1) {
                 biblArr.splice(index, 1);
               };
             };
+
+            /* uri */
+            if (uriArr.includes(uri)) {
+              const index = uriArr.indexOf(uri);
+              if (index > -1) {
+                uriArr.splice(index, 1);
+              };
+            };
           };
 
           /* print the bibl str */
-          if (comp.innerHTML !== "") {
-            comp.innerHTML = "";
-
-            if (biblArr.length > 1) {
-              biblArr.forEach((bibl) => {
-                comp.innerHTML += "<span class='btn-triple-divider'>" + bibl + "</span>";
-              });
-            } else {
-              biblArr.forEach((bibl) => {
-                comp.innerHTML += bibl;
-              });
-            };
+          comp.innerHTML = "";
+          if (biblArr.length > 1) {
+            biblArr.forEach((bibl) => {
+              comp.innerHTML += "<span class='btn-triple-divider'>" + bibl + "</span>";
+            });
           } else {
-            comp.innerHTML = "object";
+            biblArr.forEach((bibl) => {
+              comp.innerHTML += bibl;
+            });
           };
+
+          /* pass the variables to submit */
+          document.querySelector(".submit-triple").setAttribute("data-object", uriArr.join("___"));
 
         } else {
+          /* SUBJECT */
           /* print the bibl str */
           comp.innerHTML = biblStr;
+
+          /* pass the variables to submit */
+          document.querySelector(".submit-triple").setAttribute("data-subject", uri);
         };
 
       });
     });
   });
-  
+
 };
 
 /* expand abbreviations */
@@ -113,9 +135,37 @@ let rdfData = () => {
   var submits = document.querySelectorAll(".submit-triple");
   submits.forEach((submit) => {
     submit.addEventListener("click", () => {
+      var subject = submit.getAttribute("data-subject");
+      var predicate;
+      var objects = submit.getAttribute("data-object").split("___");
+
+      var rdfSubject = document.querySelector("[data-type='triple'][data-role='subject']");
+      var rdfObject = document.querySelector("[data-type='triple'][data-role='object']");
+
+
       /* subject */
+      rdfSubject.innerHTML = "&#x3c;" + subject + "&#x3e;";
+
       /* predicate */
+
       /* object */
+      if (objects.length > 1) {
+        rdfObject.innerHTML = "";
+        objects.forEach((object) => {
+          rdfObject.innerHTML += "<span>" + "&#x3c;" + object + "&#x3e;" + "</span>";
+          rdfObject.classList.remove("rdf-full-stop");
+          rdfObject.classList.add("rdf-semicolon");
+        });
+      } else if (objects.length = 1) {
+        rdfObject.innerHTML = "";
+        objects.forEach((object) => {
+          rdfObject.innerHTML += "&#x3c;" + object + "&#x3e;";
+          rdfObject.classList.add("rdf-full-stop");
+          rdfObject.classList.remove("rdf-semicolon");
+        });
+      } else {
+        rdfObject.innerHTML = "";
+      };
     });
   });
 };

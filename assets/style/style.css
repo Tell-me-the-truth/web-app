@@ -46,6 +46,10 @@ main {
 }
 
 /* triple */
+.res-triple {
+  font-family: 'Courier New', Courier, monospace;
+}
+
 .res-section {
   height: 45%;
   overflow-y: scroll;
@@ -83,6 +87,18 @@ main {
 
 .btn-triple-divider:not(:last-child):after {
   content: ", ";
+}
+
+.rdf-full-stop::after {
+  content: " \002E";
+}
+
+.rdf-semicolon span:not(:last-child):after {
+  content: " \003B";
+}
+
+.rdf-semicolon span:last-child:after {
+  content: " \002E";
 }
 
 /* buttons */
