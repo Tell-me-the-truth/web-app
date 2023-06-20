@@ -45,7 +45,31 @@ main {
   }
 }
 
-/* subject */
+/* triple */
+.res-section {
+  height: 45%;
+  overflow-y: scroll;
+}
+
+.res-section {
+  scrollbar-width: auto;
+  scrollbar-color: #F0F0F0 #FFF;
+}
+
+.res-section::-webkit-scrollbar {
+  width: 16px;
+}
+
+.res-section::-webkit-scrollbar-track {
+  background: #FFF;
+}
+
+.res-section::-webkit-scrollbar-thumb {
+  background-color: #F0F0F0;
+  border-radius: 10px;
+  border: 3px solid #FFF;
+}
+
 .subject {
   cursor: pointer;
 }
