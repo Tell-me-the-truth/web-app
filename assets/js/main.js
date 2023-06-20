@@ -144,7 +144,13 @@ let rdfData = () => {
 
 
       /* subject */
-      rdfSubject.innerHTML = "&#x3c;" + subject + "&#x3e;";
+      if (subject !== null) {
+        rdfSubject.innerHTML = "&#x3c;" + subject + "&#x3e;";
+        rdfObject.classList.add("rdf-semicolon");
+      } else {
+        rdfSubject.innerHTML = "";
+        rdfObject.classList.remove("rdf-semicolon");
+      };
 
       /* predicate */
 
@@ -159,13 +165,18 @@ let rdfData = () => {
       } else if (objects.length = 1) {
         rdfObject.innerHTML = "";
         objects.forEach((object) => {
-          rdfObject.innerHTML += "&#x3c;" + object + "&#x3e;";
-          rdfObject.classList.add("rdf-full-stop");
-          rdfObject.classList.remove("rdf-semicolon");
+          if (object == "") {
+            rdfObject.innerHTML = "";
+            rdfObject.classList.remove("rdf-full-stop");
+            rdfObject.classList.remove("rdf-semicolon");
+          } else {
+            rdfObject.innerHTML += "&#x3c;" + object + "&#x3e;";
+            rdfObject.classList.add("rdf-full-stop");
+            rdfObject.classList.remove("rdf-semicolon");
+          };
         });
-      } else {
-        rdfObject.innerHTML = "";
       };
+
     });
   });
 };
