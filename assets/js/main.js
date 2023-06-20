@@ -135,13 +135,16 @@ let rdfData = () => {
   var submits = document.querySelectorAll(".submit-triple");
   submits.forEach((submit) => {
     submit.addEventListener("click", () => {
+
+      /* triple values */
       var subject = submit.getAttribute("data-subject");
-      var predicate;
+      var predicateSelect = document.querySelector(".select-predicate");
       var objects = submit.getAttribute("data-object").split("___");
 
+      /* triple rdf components */
       var rdfSubject = document.querySelector("[data-type='triple'][data-role='subject']");
+      var rdfPredicate = document.querySelector("[data-type='triple'][data-role='predicate']");
       var rdfObject = document.querySelector("[data-type='triple'][data-role='object']");
-
 
       /* subject */
       if (subject !== null) {
@@ -153,6 +156,9 @@ let rdfData = () => {
       };
 
       /* predicate */
+      var predicate = predicateSelect.options[predicateSelect.selectedIndex].text;
+      var prefix = predicateSelect.options[predicateSelect.selectedIndex].getAttribute("data-prefix");
+      rdfPredicate.innerHTML = prefix + predicate;
 
       /* object */
       if (objects.length > 1) {
