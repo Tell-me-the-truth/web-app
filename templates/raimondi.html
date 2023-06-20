@@ -55,26 +55,22 @@
         <span class="fs-5">1. Select <span><i class="bi bi-arrow-right"></i></span> a text by <span>{{ author
             }}</span></span>
         {% endfor %}
-        <!-- insert author -->
       </div>
+      <!-- starting author -->
       <div class="list-group list-group-flush border-bottom scrollarea">
-        <!-- single text -->
-        {% for key in raimondiWorksDict %}
-        {% for value in raimondiWorksDict[key] %}
-        <div class="list-group-item py-3 lh-sm" aria-current="true">
-          <div class="col-10 mb-1 small form-check">
-            <div class="form-check">
-              <input class="form-check-input select-txt" type="radio" id='{{ value.split("---")[0] }}'
-                data-author="{{ key }}" data-title='{{ value.split("---")[1].split("___")[0] }}'
-                data-datapub='{{ value.split("___")[1] }}' data-triple="subject" name="selectSubject">
-              <label class="form-check-label" for='{{ value.split("---")[0] }}'>
-                <b>{{ key }}</b>, <i>{{ value.split("---")[1].split("___")[0] }}</i>, <span>{{ value.split("___")[1]
-                  }}</span>
-              </label>
+        {% for key in authorDict %}
+          <div class="list-group-item py-3 lh-sm" aria-current="true">
+            <div class="col-10 mb-1 small form-check">
+              <div class="form-check">
+                <input class="form-check-input select-txt" type="radio" id='{{ authorDict[key]["id"] }}'
+                  data-author='{{ authorDict[key]["author"] }}' data-title='{{ authorDict[key]["title"] }}'
+                  data-datapub='{{ authorDict[key]["pubdate"] }}' data-triple="subject" name="selectSubject">
+                <label class="form-check-label" for='{{ authorDict[key]["id"] }}'>
+                  <b>{{ authorDict[key]["author"] }}</b>, <i>{{ authorDict[key]["title"] }}</i>, <span>{{ authorDict[key]["pubdate"] }}</span>
+                </label>
+              </div>
             </div>
           </div>
-        </div>
-        {% endfor %}
         {% endfor %}
       </div>
     </div>
@@ -113,18 +109,16 @@
         <div class="row">
           <div class="col-md-12">
             <div class="collapse bg-white p-3 rounded fade show" id="collapseExample">
-              {% for key in inflRaimondiDict %}
-              {% for value in inflRaimondiDict[key] %}
+              {% for key in influencersDict %}
               <div class="form-check">
-                <input class="form-check-input select-txt" type="checkbox" data-author="{{ key }}"
-                  data-title='{{ value.split("___")[0] }}' data-datapub='{{ value.split("___")[1] }}'
+                <input class="form-check-input select-txt" type="checkbox" data-author='{{ influencersDict[key]["author"] }}'
+                  data-title='{{ influencersDict[key]["title"] }}' data-datapub='{{ influencersDict[key]["pubdate"] }}'
                   data-triple="object">
                 <label class="form-check-label" for="flexCheckDefault">
-                  <b>{{ key }}</b>, <i>{{ value.split("___")[0] }}</i>, <span>{{ value.split("___")[1] }}</span>
+                  <b>{{ influencersDict[key]["author"] }}</b>, <i>{{ influencersDict[key]["title"] }}</i>, <span>{{ influencersDict[key]["pubdate"] }}</span>
                 </label>
                 <button type="button" class="btn btn-sm btn-relations">Metadata</button>
               </div>
-              {% endfor %}
               {% endfor %}
             </div>
           </div>
@@ -148,8 +142,8 @@
           <div class="col-md-3 text-center">
             <!-- select the rdf serialization -->
             <div class="arrow mb-2">Predicate</div>
-            <select class="form-select form-select-sm" aria-label=".form-select-sm">
-              <option selected>was_influenced_by</option>
+            <select class="form-select form-select-sm select-predicate" aria-label=".form-select-sm">
+              <option value="was_influenced_by">was_influenced_by</option>
             </select>
           </div> <!-- insert predicate -->
           <div class="col-md-3 text-end">
@@ -169,8 +163,8 @@
           </div>
         </div>
         <!-- submit -->
-        <div class="">
-          <button type="button" class="btn btn-relations">Save</button>
+        <div>
+          <button type="button" class="btn btn-relations submit-data">Save</button>
         </div>
       </div>
     </div>
@@ -201,8 +195,14 @@
             <option value="3">Three</option>
           </select>
           <!-- rdf result -->
-          <div class="res-section text-bg-light my-3 p-3"> <!-- insert the rdf triple -->
-            Here is the generated RDF.
+          <div class="res-section text-bg-light my-3 p-3 res-triple"> <!-- insert the rdf triple -->
+            @prefix ecrm: &#x3c;http://erlangen-crm.org/current/&#x3e; .
+            &#x3c;https: //w3id.org/giuseppe-raimondi-lod/pub-text/mostro-a-due-teste-1971/creation&#x3e;
+            ecrm:P15_was_influenced_by &#x3c;https: //w3id.org/giuseppe-raimondi-lod/pub-text/preface-1925&#x3e; .
+            <br>
+            @prefix ecrm: &#x3c;http://erlangen-crm.org/current/&#x3e; .
+            &#x3c;https: //w3id.org/giuseppe-raimondi-lod/pub-text/mostro-a-due-teste-1971/creation&#x3e;
+            ecrm:P3_has_note "The newspaper article 'Mostro a due Teste' by Giuseppe Raimondi (in «Corriere della Sera», 28 ottobre 1971), was influence by Paul Valéry's 'Préface pour une nouvelle traduction de La Soiréè avec M. Teste' (in «Commerce», 1925, n. 4). Supporting evidence for this connection is provided by the presence of handwritten annotations by Giuseppe Raimondi on his copy of the 'Préface' (BIFICLIT, FR PER COMMER 1925, p. 100). Such annotations read 'Mostri, prodotti dei pensieri' and 'Idee mostri'. The article title 'Mostro a due Teste' is a possible reworking of these notes."^^xsd:string .
           </div>
         </div>
       </div>

@@ -1,5 +1,4 @@
 from flask import Blueprint, render_template
-from rdflib import Graph
 from SPARQLWrapper import SPARQLWrapper, JSON
 import uuid
 
@@ -7,7 +6,7 @@ import uuid
 views = Blueprint(__name__, "views")
 
 """ endpoint """
-endpoint = "http://192.168.1.134:9999/blazegraph/sparql"
+endpoint = "http://10.67.228.243:9999/blazegraph/sparql"
 sparql = SPARQLWrapper(endpoint)
 
 """ query """
@@ -81,48 +80,24 @@ def raimondi():
     sparql.setReturnFormat(JSON)
     raimondiResults =  sparql.query().convert()
 
-    """ create a dictionary """
-    raimondiAuthors = []
-    raimondiWorksDict = {}
-
-    """ authors """
+    """ original author works dict """
+    authorDict = {}
     for result in raimondiResults["results"]["bindings"]:
-        if result["author"]["value"] not in raimondiAuthors:
-            raimondiAuthors.append(result["author"]["value"])
-        
-    """ works """
-    for author in raimondiAuthors:
-        authorWorks = []
-        for result in raimondiResults["results"]["bindings"]:
-            uuidID = uuid.uuid4()
-            id = str(uuidID)
-            if author == result["author"]["value"]:
-                if id + "---" + result["title"]["value"] + "___" + result["pubdate"]["value"] not in authorWorks:
-                    authorWorks.append(id + "---" + result["title"]["value"] + "___" + result["pubdate"]["value"])
-                raimondiWorksDict[author] = authorWorks
+        uuidID = uuid.uuid4()
+        id = str(uuidID)
+        authorDict[result["text"]["value"]] = {"id": id, "title": result["title"]["value"], "pubdate": result["pubdate"]["value"], "author": result["author"]["value"]}
 
-    """ works influencing raimondi """
+    """ influencing authors works """
     """ convert data into JSON """
     sparql.setQuery(raimondiInfluencingquery)
     sparql.setReturnFormat(JSON)
     inflRaimondiResults =  sparql.query().convert()
 
-    """ create a dictionary """
-    inflRaimondiAuthors = []
-    inflRaimondiWorksDict = {}
-
-    """ authors """
+    """ influencing authors works dict """
+    influencersDict = {}
     for result in inflRaimondiResults["results"]["bindings"]:
-        if result["author"]["value"] not in inflRaimondiAuthors:
-            inflRaimondiAuthors.append(result["author"]["value"])
+        uuidID = uuid.uuid4()
+        id = str(uuidID)
+        influencersDict[result["text"]["value"]] = {"id": id, "title": result["title"]["value"], "pubdate": result["pubdate"]["value"], "author": result["author"]["value"]}
 
-    """ works """
-    for author in inflRaimondiAuthors:
-        authorWorks = []
-        for result in inflRaimondiResults["results"]["bindings"]:
-            if author == result["author"]["value"]:
-                if result["title"]["value"] + "___" + result["pubdate"]["value"] not in authorWorks:
-                    authorWorks.append(result["title"]["value"] + "___" + result["pubdate"]["value"])
-                inflRaimondiWorksDict[author] = authorWorks
-
-    return render_template("raimondi.html", raimondiAuthors = raimondiAuthors, raimondiWorksDict = raimondiWorksDict, inflRaimondiDict = inflRaimondiWorksDict)
+    return render_template("raimondi.html", authorDict = authorDict, influencersDict = influencersDict)

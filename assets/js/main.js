@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   checkDeviceW();
-  selectTxt();
+  selectTripleComp();
+  rdfData();
 });
 
 /* check the width of device */
@@ -23,11 +24,18 @@ let checkDeviceW = () => {
   });
 };
 
-/* select triple components */
-let selectTxt = () => {
-  /* array of bibl */
+/* select triple subject and object */
+let selectTripleComp = () => {
+  /* subject */
+  var biblStr;
+
+  /* object / array of bibl */
   var biblArr = [];
 
+  /* set subject/predicate/object attribute to submit button */
+  var submit = document.querySelectorAll(".submit-data");
+
+  /* subject / object */
   var txts = document.querySelectorAll(".select-txt");
   txts.forEach((txt) => {
     txt.addEventListener(("click"), (e) => {
@@ -36,7 +44,7 @@ let selectTxt = () => {
       var author = e.target.getAttribute("data-author");
       var title = e.target.getAttribute("data-title");
       var pubdate = e.target.getAttribute("data-dataPub");
-      var biblStr = "<b>" + author + "</b>" + "<span>, </span>" + "<i>" + title + "</i>" + "<span>, </span>" + "<span>" + pubdate + "</span>";
+      biblStr = "<b>" + author + "</b>" + "<span>, </span>" + "<i>" + title + "</i>" + "<span>, </span>" + "<span>" + pubdate + "</span>";
 
       /* set the data in the subject/object of the triple */
       var tripleComps = document.querySelectorAll("." + tripleRole);
@@ -76,16 +84,43 @@ let selectTxt = () => {
           } else {
             comp.innerHTML = "object";
           };
-          
+
+          /* submit button / object */
+          var obj = biblArr.join("___");
+
+          submit.forEach((btn) => {
+            btn.setAttribute("data-object", obj);
+          });
+
         } else {
           /* print the bibl str */
           comp.classList.add("btn-triple");
           comp.innerHTML = biblStr;
+
+          /* submit button / object */
+          submit.forEach((btn) => {
+            btn.setAttribute("data-subject", biblStr);
+          });
         };
+      });
+
+      /* expand abbreviation */
+      expandAbbreviations();
+    });
+  });
+
+  /* predicate */
+  var selectPredicate = document.querySelectorAll(".select-predicate");
+  selectPredicate.forEach((select) => {
+    select.addEventListener("change", (e) => {
+      var options = e.target;
+      var predicate = options.value;
+      /* submit button / predicate */
+      submit.forEach((btn) => {
+        btn.setAttribute("data-predicate", predicate);
       });
     });
   });
-  expandAbbreviations();
 };
 
 /* expand abbreviations */
@@ -94,6 +129,27 @@ let expandAbbreviations = () => {
   abbreviations.forEach((abbr) => {
     abbr.addEventListener(("click"), () => {
       abbr.classList.toggle("btn-triple");
+    });
+  });
+};
+
+/* save data for rdf generation */
+let rdfData = () => {
+  /* click on submit buttons */
+  var submits = document.querySelectorAll(".submit-data");
+  submits.forEach((submit) => {
+    submit.addEventListener("click", () => {
+      /* strip html tags */
+
+      /* objects */
+      var subj = submit.getAttribute("data-subject");
+      console.log(subj);
+
+      /* objects */
+      var objs = submit.getAttribute("data-object").split("___");
+      objs.forEach((obj) => {
+        console.log("Object: " + obj.replace(/(<([^>]+)>)/gi, ""));
+      });
     });
   });
 };
