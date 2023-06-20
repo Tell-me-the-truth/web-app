@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   checkDeviceW();
   selectTripleComp();
+  expandAbbreviations();
   rdfData();
 });
 
@@ -32,9 +33,6 @@ let selectTripleComp = () => {
   /* object / array of bibl */
   var biblArr = [];
 
-  /* set subject/predicate/object attribute to submit button */
-  var submit = document.querySelectorAll(".submit-data");
-
   /* subject / object */
   var txts = document.querySelectorAll(".select-txt");
   txts.forEach((txt) => {
@@ -52,7 +50,6 @@ let selectTripleComp = () => {
 
         /* if object add/remove bibl from array because of checkbox */
         if (comp.classList.contains("object")) {
-          comp.classList.add("btn-triple");
 
           /* add checked texts to array */
           if (e.target.checked) {
@@ -85,42 +82,15 @@ let selectTripleComp = () => {
             comp.innerHTML = "object";
           };
 
-          /* submit button / object */
-          var obj = biblArr.join("___");
-
-          submit.forEach((btn) => {
-            btn.setAttribute("data-object", obj);
-          });
-
         } else {
           /* print the bibl str */
-          comp.classList.add("btn-triple");
           comp.innerHTML = biblStr;
-
-          /* submit button / object */
-          submit.forEach((btn) => {
-            btn.setAttribute("data-subject", biblStr);
-          });
         };
-      });
 
-      /* expand abbreviation */
-      expandAbbreviations();
-    });
-  });
-
-  /* predicate */
-  var selectPredicate = document.querySelectorAll(".select-predicate");
-  selectPredicate.forEach((select) => {
-    select.addEventListener("change", (e) => {
-      var options = e.target;
-      var predicate = options.value;
-      /* submit button / predicate */
-      submit.forEach((btn) => {
-        btn.setAttribute("data-predicate", predicate);
       });
     });
   });
+  
 };
 
 /* expand abbreviations */
@@ -128,7 +98,11 @@ let expandAbbreviations = () => {
   var abbreviations = document.querySelectorAll(".triple-comp");
   abbreviations.forEach((abbr) => {
     abbr.addEventListener(("click"), () => {
-      abbr.classList.toggle("btn-triple");
+      if (abbr.classList.contains("btn-triple") == true) {
+        abbr.classList.remove("btn-triple");
+      } else {
+        abbr.classList.add("btn-triple");
+      };
     });
   });
 };
@@ -136,20 +110,12 @@ let expandAbbreviations = () => {
 /* save data for rdf generation */
 let rdfData = () => {
   /* click on submit buttons */
-  var submits = document.querySelectorAll(".submit-data");
+  var submits = document.querySelectorAll(".submit-triple");
   submits.forEach((submit) => {
     submit.addEventListener("click", () => {
-      /* strip html tags */
-
-      /* objects */
-      var subj = submit.getAttribute("data-subject");
-      console.log(subj);
-
-      /* objects */
-      var objs = submit.getAttribute("data-object").split("___");
-      objs.forEach((obj) => {
-        console.log("Object: " + obj.replace(/(<([^>]+)>)/gi, ""));
-      });
+      /* subject */
+      /* predicate */
+      /* object */
     });
   });
 };

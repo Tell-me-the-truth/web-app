@@ -51,26 +51,26 @@
     <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-secondary bg-gradient bg-opacity-75 lw-19">
       <div class="d-flex align-items-center flex-shrink-0 p-3 text-white text-decoration-none border-bottom">
         <button type="button" class="btn btn-sm btn-texts btn-circle me-2"><i class="bi bi-x-lg"></i></button>
-        {% for author in raimondiAuthors %}
-        <span class="fs-5">1. Select <span><i class="bi bi-arrow-right"></i></span> a text by <span>{{ author
-            }}</span></span>
-        {% endfor %}
+        <span class="fs-5">1. Select <span><i class="bi bi-arrow-right"></i></span> a text by <span>Giuseppe
+            Raimondi</span></span>
       </div>
       <!-- starting author -->
       <div class="list-group list-group-flush border-bottom scrollarea">
         {% for key in authorDict %}
-          <div class="list-group-item py-3 lh-sm" aria-current="true">
-            <div class="col-10 mb-1 small form-check">
-              <div class="form-check">
-                <input class="form-check-input select-txt" type="radio" id='{{ authorDict[key]["id"] }}'
-                  data-author='{{ authorDict[key]["author"] }}' data-title='{{ authorDict[key]["title"] }}'
-                  data-datapub='{{ authorDict[key]["pubdate"] }}' data-triple="subject" name="selectSubject">
-                <label class="form-check-label" for='{{ authorDict[key]["id"] }}'>
-                  <b>{{ authorDict[key]["author"] }}</b>, <i>{{ authorDict[key]["title"] }}</i>, <span>{{ authorDict[key]["pubdate"] }}</span>
-                </label>
-              </div>
+        <div class="list-group-item py-3 lh-sm" aria-current="true">
+          <div class="col-10 mb-1 small form-check">
+            <div class="form-check">
+              <input class="form-check-input select-txt" type="radio" id='{{ authorDict[key]["id"] }}'
+                data-uri='{{ key }}' data-author='{{ authorDict[key]["author"] }}'
+                data-title='{{ authorDict[key]["title"] }}' data-datapub='{{ authorDict[key]["pubdate"] }}'
+                data-triple="subject" name="selectSubject">
+              <label class="form-check-label" for='{{ authorDict[key]["id"] }}'>
+                <b>{{ authorDict[key]["author"] }}</b>, <i>{{ authorDict[key]["title"] }}</i>, <span>{{
+                  authorDict[key]["pubdate"] }}</span>
+              </label>
             </div>
           </div>
+        </div>
         {% endfor %}
       </div>
     </div>
@@ -111,11 +111,12 @@
             <div class="collapse bg-white p-3 rounded fade show" id="collapseExample">
               {% for key in influencersDict %}
               <div class="form-check">
-                <input class="form-check-input select-txt" type="checkbox" data-author='{{ influencersDict[key]["author"] }}'
-                  data-title='{{ influencersDict[key]["title"] }}' data-datapub='{{ influencersDict[key]["pubdate"] }}'
-                  data-triple="object">
+                <input class="form-check-input select-txt" type="checkbox" id='{{ influencersDict[key]["id"] }}' data-uri='{{ key }}'
+                  data-author='{{ influencersDict[key]["author"] }}' data-title='{{ influencersDict[key]["title"] }}'
+                  data-datapub='{{ influencersDict[key]["pubdate"] }}' data-triple="object">
                 <label class="form-check-label" for="flexCheckDefault">
-                  <b>{{ influencersDict[key]["author"] }}</b>, <i>{{ influencersDict[key]["title"] }}</i>, <span>{{ influencersDict[key]["pubdate"] }}</span>
+                  <b>{{ influencersDict[key]["author"] }}</b>, <i>{{ influencersDict[key]["title"] }}</i>, <span>{{
+                    influencersDict[key]["pubdate"] }}</span>
                 </label>
                 <button type="button" class="btn btn-sm btn-relations">Metadata</button>
               </div>
@@ -164,7 +165,7 @@
         </div>
         <!-- submit -->
         <div>
-          <button type="button" class="btn btn-relations submit-data">Save</button>
+          <button type="submit" class="btn btn-relations submit-triple">Save</button>
         </div>
       </div>
     </div>
@@ -202,7 +203,12 @@
             <br>
             @prefix ecrm: &#x3c;http://erlangen-crm.org/current/&#x3e; .
             &#x3c;https: //w3id.org/giuseppe-raimondi-lod/pub-text/mostro-a-due-teste-1971/creation&#x3e;
-            ecrm:P3_has_note "The newspaper article 'Mostro a due Teste' by Giuseppe Raimondi (in «Corriere della Sera», 28 ottobre 1971), was influence by Paul Valéry's 'Préface pour une nouvelle traduction de La Soiréè avec M. Teste' (in «Commerce», 1925, n. 4). Supporting evidence for this connection is provided by the presence of handwritten annotations by Giuseppe Raimondi on his copy of the 'Préface' (BIFICLIT, FR PER COMMER 1925, p. 100). Such annotations read 'Mostri, prodotti dei pensieri' and 'Idee mostri'. The article title 'Mostro a due Teste' is a possible reworking of these notes."^^xsd:string .
+            ecrm:P3_has_note "The newspaper article 'Mostro a due Teste' by Giuseppe Raimondi (in «Corriere della Sera»,
+            28 ottobre 1971), was influence by Paul Valéry's 'Préface pour une nouvelle traduction de La Soiréè avec M.
+            Teste' (in «Commerce», 1925, n. 4). Supporting evidence for this connection is provided by the presence of
+            handwritten annotations by Giuseppe Raimondi on his copy of the 'Préface' (BIFICLIT, FR PER COMMER 1925, p.
+            100). Such annotations read 'Mostri, prodotti dei pensieri' and 'Idee mostri'. The article title 'Mostro a
+            due Teste' is a possible reworking of these notes."^^xsd:string .
           </div>
         </div>
       </div>

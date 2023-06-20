@@ -91,11 +91,11 @@ def raimondi():
     """ convert data into JSON """
     sparql.setQuery(raimondiInfluencingquery)
     sparql.setReturnFormat(JSON)
-    inflRaimondiResults =  sparql.query().convert()
+    influencersResults =  sparql.query().convert()
 
     """ influencing authors works dict """
     influencersDict = {}
-    for result in inflRaimondiResults["results"]["bindings"]:
+    for result in influencersResults["results"]["bindings"]:
         uuidID = uuid.uuid4()
         id = str(uuidID)
         influencersDict[result["text"]["value"]] = {"id": id, "title": result["title"]["value"], "pubdate": result["pubdate"]["value"], "author": result["author"]["value"]}
