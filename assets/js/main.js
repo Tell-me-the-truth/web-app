@@ -183,6 +183,22 @@ let rdfData = () => {
         });
       };
 
+      /* NOTE */
+      var note = document.querySelector(".scholarly-note").value;
+      var rdfPredicateNote = document.querySelector("[data-type='triple'][data-role='predicate-note']");
+      var rdfObjectNote = document.querySelector("[data-type='triple'][data-role='object-note']");
+      if (note !== "") {
+        rdfPredicateNote.innerHTML = "ecrm:P3_has_note";
+        rdfObjectNote.innerHTML = '"' + note + '" &#x2e;';
+        rdfPredicateNote.previousElementSibling.classList.remove("rdf-full-stop");
+        rdfPredicateNote.previousElementSibling.classList.remove("rdf-semicolon");
+        rdfPredicateNote.previousElementSibling.classList.add("rdf-all-semicolon");
+      } else {
+        rdfPredicateNote.innerHTML = "";
+        rdfObjectNote.innerHTML = "";
+        rdfPredicateNote.previousElementSibling.classList.remove("rdf-all-semicolon");
+      };
+
     });
   });
 };

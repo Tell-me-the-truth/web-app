@@ -101,6 +101,10 @@ main {
   content: " \002E";
 }
 
+.rdf-all-semicolon span::after {
+  content: " \003B";
+}
+
 /* buttons */
 .dropdown-toggle {
   outline: 0;
