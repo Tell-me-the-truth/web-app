@@ -194,21 +194,27 @@ let rdfData = () => {
       var lastObj = objsToDivide[objsToDivideLen];
 
       objsToDivide.forEach((obj) => {
-        /* if more than one object */
-        /* if the next element sibling is empty */
-        /* add ; to all the objects except the last that is assigned with . */
-        if (obj.parentNode.nextElementSibling.innerHTML == "") {
-          if (obj.parentNode.children.length > 1) {
-            obj.classList.add("rdf-semicolon");
-            lastObj.classList.remove("rdf-semicolon");
-            lastObj.classList.add("rdf-full-stop");
-          } else {
-            obj.classList.add("rdf-full-stop");
-          };
+        /* NOTE */
+        if (obj.parentNode.getAttribute("data-role") == "object-note") {
+          obj.classList.add("rdf-full-stop");
         } else {
-          /* if the next element sibling is not empty */
-          /* add ; to all the objects */
-          
+          /* OTHER OBJECTS */
+          /* if more than one object */
+          /* if the next element sibling is empty */
+          /* add ; to all the objects except the last that is assigned with . */
+          if (obj.parentNode.nextElementSibling.innerHTML == "") {
+            if (obj.parentNode.children.length > 1) {
+              obj.classList.add("rdf-semicolon");
+              lastObj.classList.remove("rdf-semicolon");
+              lastObj.classList.add("rdf-full-stop");
+            } else {
+              obj.classList.add("rdf-full-stop");
+            };
+          } else {
+            /* if the next element sibling is not empty */
+            /* add ; to all the objects */
+            obj.classList.add("rdf-semicolon");
+          };
         };
       });
 
