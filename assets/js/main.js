@@ -111,6 +111,10 @@ let selectTripleComp = () => {
         };
 
       });
+
+      /* block / unblock save button */
+      blockSaveBtn();
+
     });
   });
 
@@ -128,6 +132,36 @@ let expandAbbreviations = () => {
       };
     });
   });
+};
+
+/* block buttons if not enough data */
+let blockSaveBtn = () => {
+  /* options */
+  var options = document.querySelectorAll(".select-txt");
+  var selectedSubj = [];
+  var selectedObj = [];
+
+  /* buttons */
+  var saveBtn = document.querySelector(".submit-triple");
+
+  options.forEach((opt) => {
+    if (opt.checked == true) {
+      if (opt.getAttribute("data-triple") == "subject") {
+        selectedSubj.push(opt);
+      } else if (opt.getAttribute("data-triple") == "object") {
+        selectedObj.push(opt);
+      };
+    };
+  });
+
+  /* if at least 1 subj and 1 obj */
+  if (selectedSubj.length > 0 && selectedObj.length > 0) {
+    saveBtn.removeAttribute("disabled");
+  } else {
+    /* if no subj and obj */
+    saveBtn.setAttribute("disabled", "disabled");
+  };
+
 };
 
 /* save data for rdf generation */
