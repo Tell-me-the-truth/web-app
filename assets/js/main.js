@@ -143,7 +143,14 @@ let blockSaveBtn = () => {
 
   /* buttons */
   var saveBtn = document.querySelector(".submit-triple");
+  var confirmBtn = document.querySelector(".btn-confirm");
+  var cancelBtn = document.querySelector(".btn-cancel");
 
+  /* block confirm/cancel btn */
+  confirmBtn.setAttribute("disabled", "disabled");
+  cancelBtn.setAttribute("disabled", "disabled");
+
+  /* check if there's at least 1 subj and 1 obj */
   options.forEach((opt) => {
     if (opt.checked == true) {
       if (opt.getAttribute("data-triple") == "subject") {
@@ -252,6 +259,13 @@ let rdfData = () => {
         };
       });
 
+      /* block/unblock save/confirm/cancel button */
+      var saveBtn = document.querySelector(".submit-triple");
+      var confirmBtn = document.querySelector(".btn-confirm");
+      var cancelBtn = document.querySelector(".btn-cancel");
+      confirmBtn.removeAttribute("disabled");
+      cancelBtn.removeAttribute("disabled");
+      saveBtn.setAttribute("disabled", "disabled");
     });
   });
 };
@@ -260,15 +274,33 @@ let rdfData = () => {
 let confirmData = () => {
   var confirmBtn = document.querySelector(".btn-confirm");
   confirmBtn.addEventListener("click", () => {
+
+    /* triple */
     var subject = document.querySelector("[data-type='triple'][data-role='subject']").innerHTML;
     var predicate = document.querySelector("[data-type='triple'][data-role='predicate']").innerHTML;
     var object = document.querySelector("[data-type='triple'][data-role='object']").innerHTML;
+
+    /* buttons */
+    var saveBtn = document.querySelector(".submit-triple");
+    var confirmBtn = document.querySelector(".btn-confirm");
+    var cancelBtn = document.querySelector(".btn-cancel");
+
     if (subject !== "" && predicate !== "" && object !== "") {
       let text = "Do you confirm this data?";
       if (confirm(text) == true) {
-        alert("Data added to the knowledge base!")
+        alert("Data added to the knowledge base!");
+
+        /* block/unblock save/confirm/cancel button */
+        confirmBtn.setAttribute("disabled", "disabled");
+        cancelBtn.setAttribute("disabled", "disabled");
+        saveBtn.setAttribute("disabled", "disabled");
       } else {
         prompt("What's wrong with these data?");
+
+        /* block/unblock save/confirm/cancel button */
+        confirmBtn.setAttribute("disabled", "disabled");
+        cancelBtn.setAttribute("disabled", "disabled");
+        saveBtn.setAttribute("disabled", "disabled");
       }
     } else {
       alert("Let's insert at least one subject, predicate, and object to confirm data.");
