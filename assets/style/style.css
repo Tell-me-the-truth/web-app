@@ -93,15 +93,7 @@ main {
   content: " \002E";
 }
 
-.rdf-semicolon span:not(:last-child):after {
-  content: " \003B";
-}
-
-.rdf-semicolon span:last-child:after {
-  content: " \002E";
-}
-
-.rdf-all-semicolon span::after {
+.rdf-semicolon::after {
   content: " \003B";
 }
 

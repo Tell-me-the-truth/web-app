@@ -150,10 +150,8 @@ let rdfData = () => {
       /* subject */
       if (subject !== null) {
         rdfSubject.innerHTML = "&#x3c;" + subject + "&#x3e;";
-        rdfObject.classList.add("rdf-semicolon");
       } else {
         rdfSubject.innerHTML = "";
-        rdfObject.classList.remove("rdf-semicolon");
       };
 
       /* predicate */
@@ -166,20 +164,14 @@ let rdfData = () => {
         rdfObject.innerHTML = "";
         objects.forEach((object) => {
           rdfObject.innerHTML += "<span>" + "&#x3c;" + object + "&#x3e;" + "</span>";
-          rdfObject.classList.remove("rdf-full-stop");
-          rdfObject.classList.add("rdf-semicolon");
         });
       } else if (objects.length = 1) {
         rdfObject.innerHTML = "";
         objects.forEach((object) => {
           if (object == "") {
             rdfObject.innerHTML = "";
-            rdfObject.classList.remove("rdf-full-stop");
-            rdfObject.classList.remove("rdf-semicolon");
           } else {
-            rdfObject.innerHTML += "&#x3c;" + object + "&#x3e;";
-            rdfObject.classList.add("rdf-full-stop");
-            rdfObject.classList.remove("rdf-semicolon");
+            rdfObject.innerHTML += "<span>" + "&#x3c;" + object + "&#x3e;" + "</span>";
           };
         });
       };
@@ -190,15 +182,35 @@ let rdfData = () => {
       var rdfObjectNote = document.querySelector("[data-type='triple'][data-role='object-note']");
       if (note !== "") {
         rdfPredicateNote.innerHTML = "ecrm:P3_has_note";
-        rdfObjectNote.innerHTML = '"' + note + '" &#x2e;';
-        rdfPredicateNote.previousElementSibling.classList.remove("rdf-full-stop");
-        rdfPredicateNote.previousElementSibling.classList.remove("rdf-semicolon");
-        rdfPredicateNote.previousElementSibling.classList.add("rdf-all-semicolon");
+        rdfObjectNote.innerHTML = "<span>" + '"' + note + '"' + "</span>";
       } else {
         rdfPredicateNote.innerHTML = "";
         rdfObjectNote.innerHTML = "";
-        rdfPredicateNote.previousElementSibling.classList.remove("rdf-all-semicolon");
       };
+
+      /* PUNCTUATION */
+      var objsToDivide = document.querySelectorAll("[data-punctuation='check'] span");
+      var objsToDivideLen = objsToDivide.length - 1;
+      var lastObj = objsToDivide[objsToDivideLen];
+
+      objsToDivide.forEach((obj) => {
+        /* if more than one object */
+        /* if the next element sibling is empty */
+        /* add ; to all the objects except the last that is assigned with . */
+        if (obj.parentNode.nextElementSibling.innerHTML == "") {
+          if (obj.parentNode.children.length > 1) {
+            obj.classList.add("rdf-semicolon");
+            lastObj.classList.remove("rdf-semicolon");
+            lastObj.classList.add("rdf-full-stop");
+          } else {
+            obj.classList.add("rdf-full-stop");
+          };
+        } else {
+          /* if the next element sibling is not empty */
+          /* add ; to all the objects */
+          
+        };
+      });
 
     });
   });
