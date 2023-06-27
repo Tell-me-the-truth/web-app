@@ -1,3 +1,4 @@
+/* document ready */
 document.addEventListener("DOMContentLoaded", () => {
   checkDeviceW();
   selectTripleComp();

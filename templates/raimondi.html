@@ -111,9 +111,10 @@
             <div class="collapse bg-white p-3 rounded fade show" id="collapseExample">
               {% for key in influencersDict %}
               <div class="form-check">
-                <input class="form-check-input select-txt" type="checkbox" id='{{ influencersDict[key]["id"] }}' data-uri='{{ key }}'
-                  data-author='{{ influencersDict[key]["author"] }}' data-title='{{ influencersDict[key]["title"] }}'
-                  data-datapub='{{ influencersDict[key]["pubdate"] }}' data-triple="object">
+                <input class="form-check-input select-txt" type="checkbox" id='{{ influencersDict[key]["id"] }}'
+                  data-uri='{{ key }}' data-author='{{ influencersDict[key]["author"] }}'
+                  data-title='{{ influencersDict[key]["title"] }}' data-datapub='{{ influencersDict[key]["pubdate"] }}'
+                  data-triple="object">
                 <label class="form-check-label" for="flexCheckDefault">
                   <b>{{ influencersDict[key]["author"] }}</b>, <i>{{ influencersDict[key]["title"] }}</i>, <span>{{
                     influencersDict[key]["pubdate"] }}</span>
@@ -143,7 +144,8 @@
           <div class="col-md-3 text-center">
             <!-- select the rdf serialization -->
             <div class="arrow mb-2">Predicate</div>
-            <select class="form-select form-select-sm select-predicate" aria-label=".form-select-sm" data-triple="predicate">
+            <select class="form-select form-select-sm select-predicate" aria-label=".form-select-sm"
+              data-triple="predicate">
               <option value="was_influenced_by" data-prefix="ecrm:P15_">was_influenced_by</option>
             </select>
           </div> <!-- insert predicate -->
@@ -196,8 +198,8 @@
           <div class="res-section text-bg-light my-3 p-3 res-triple">
             <p data-type="triple" data-role="prefix">@prefix ecrm: &#x3c;http://erlangen-crm.org/current/&#x3e; .</p>
             <p data-type="triple" data-role="subject"></p>
-            <p data-type="triple" data-role="predicate"></p>      
-            <p data-type="triple" data-role="object" data-punctuation="check"></p>  
+            <p data-type="triple" data-role="predicate"></p>
+            <p data-type="triple" data-role="object" data-punctuation="check"></p>
             <p data-type="triple" data-role="predicate-note"></p>
             <p data-type="triple" data-role="object-note" data-punctuation="check"></p>
           </div>
@@ -223,6 +225,10 @@
 
   <script type="text/javascript" src="/assets/dist/js/bootstrap.bundle.min.js"></script>
   <script type="text/javascript" src="/assets/js/main.js"></script>
+
+  <!-- webpack -->
+  <script src="/assets/js/_bundle.js"></script>
+
 </body>
 
 </html>
