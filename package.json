@@ -49,6 +49,7 @@
     "merge-stream": "^2.0.0",
     "mime-db": "^1.52.0",
     "mime-types": "^2.1.35",
+    "n3": "^1.17.0",
     "neo-async": "^2.6.2",
     "node-releases": "^2.0.12",
     "p-limit": "^2.3.0",

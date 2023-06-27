@@ -1,3 +1,3 @@
 module.exports = function () {
-    console.log('Hello World!');
-}
+   console.log("Hello again, it's twice.");
+};
