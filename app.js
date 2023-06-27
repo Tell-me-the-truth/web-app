@@ -1,3 +1,3 @@
-const printHello = require('./print-hello');
+const printHello = require('./assets/js/print-hello');
 
 printHello();
