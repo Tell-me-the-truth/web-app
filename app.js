@@ -1,3 +1,3 @@
-const printHello = require("./assets/js/rdf-natural");
+const rdfNaturalConverter = require("./assets/js/rdf-natural");
 
-printHello();
+rdfNaturalConverter();
