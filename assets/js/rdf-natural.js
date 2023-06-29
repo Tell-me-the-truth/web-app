@@ -3,6 +3,8 @@ require("string_decoder");
 const { Parser, NamedNode } = require("n3");
 
 module.exports = function () {
+   const { Parser, NamedNode } = require('n3');
+
    async function parseRdfGraph(rdfGraph) {
       const parser = new Parser();
       const graphStrings = [];
@@ -23,48 +25,68 @@ module.exports = function () {
             }
          });
       });
-
       return graphStrings;
    }
 
+   // RDF graph in Cidoc-CRM
    const rdfGraph = `
-        @prefix ecrm: <http://erlangen-crm.org/current/> .
-    
-        <https://w3id.org/giuseppe-raimondi-lod/pub-text/mostro-a-due-teste-1971>
-        ecrm:P15_was_influenced_by
-        <https://w3id.org/giuseppe-raimondi-lod/pub-text/monsieur-teste-1927> ;
-        ecrm:P3_has_note
-        "test nota" .
-    `;
+    @prefix ecrm: <http://erlangen-crm.org/current/> .
+    @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+    @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+    <https://w3id.org/giuseppe-raimondi-lod/pub-text/mostro-a-due-teste-1971>
+    ecrm:P15_was_influenced_by
+    <https://w3id.org/giuseppe-raimondi-lod/pub-text/monsieur-teste-1927> ;
+    ecrm:P3_has_note
+    "test nota" .
+
+    <https://w3id.org/giuseppe-raimondi-lod/pub-text/mostro-a-due-teste-1971> rdfs:label "Giuseppe Raimondi, Mostro a due teste, 1971" .
+    <https://w3id.org/giuseppe-raimondi-lod/pub-text/monsieur-teste-1927> rdfs:label "Paul Valéry, Monsieur Teste, 1927" .
+
+`;
+
+   // Store the result in a variable for later use
    let parsedGraph;
 
+   // Call the async function and store the result
    parseRdfGraph(rdfGraph)
       .then(graphStrings => {
          console.log('Parsing complete!');
          parsedGraph = graphStrings;
-         console.log(parsedGraph)
+         console.log(parsedGraph);
          let text = findTemplates(parsedGraph);
-         console.log(text)
+         console.log(text);
       })
       .catch(error => {
          console.error('Error parsing RDF graph:', error);
       });
 
-   const ecrmTemplates = {
-      "http://erlangen-crm.org/current/P15_was_influenced_by": "The resource was influenced by {Object}.",
-      "http://erlangen-crm.org/current/P3_has_note": "Note: {Object}"
-   };
+   const labelDict = {}; // Dictionary to store URI-label mappings
 
    function findTemplates(arr) {
-      let convertedText = ''
+      let convertedText = '';
       arr.forEach(graph => {
-         if (graph.Predicate in ecrmTemplates) {
-            template = ecrmTemplates[graph.Predicate]
-            convertedText += template.replace("{Object}", graph.Object);
-            convertedText += ' '
+         if (graph.Predicate === 'http://www.w3.org/2000/01/rdf-schema#label') {
+            // Add URI-label mapping to the dictionary
+            labelDict[graph.Subject] = graph.Object;
          }
       });
-      return convertedText
+
+      arr.forEach(graph => {
+         if (graph.Predicate in ecrmTemplates) {
+            const template = ecrmTemplates[graph.Predicate];
+            const objectLabel = labelDict[graph.Object] || graph.Object; // Use label if available, otherwise use the URI
+            const subjectLabel = labelDict[graph.Subject] || graph.Subject; // Use label if available, otherwise use the URI
+            convertedText += template.replace("{Subject}", subjectLabel).replace("{Object}", objectLabel);
+            convertedText += ' ';
+         }
+      });
+
+      return convertedText;
+   };
+
+   const ecrmTemplates = {
+      "http://erlangen-crm.org/current/P15_was_influenced_by": "{Subject} was influenced by {Object}.",
+      "http://erlangen-crm.org/current/P3_has_note": "{Subject}'s has the following note: {Object}"
    };
 };
