@@ -164,9 +164,10 @@ let blockSaveBtn = () => {
 
   /* if at least 1 subj and 1 obj */
   if (selectedSubj.length > 0 && selectedObj.length > 0) {
+    /* enable save button */
     saveBtn.removeAttribute("disabled");
   } else {
-    /* if no subj and obj */
+    /* if no subj and obj / disable save button */
     saveBtn.setAttribute("disabled", "disabled");
   };
 
@@ -259,6 +260,10 @@ let rdfData = () => {
           };
         };
       });
+
+      /* NATURAL LANGUAGE */
+      /* show natural language res */
+      document.querySelector(".res-natural-lang p").classList.remove("d-none");
 
       /* block/unblock save/confirm/cancel button */
       var saveBtn = document.querySelector(".submit-triple");

@@ -1,3 +1,3 @@
-const rdfNaturalConverter = require("./assets/js/rdf-natural");
+const rdfNaturalConverter = require("./assets/js/rdf-natural-converter");
 
 rdfNaturalConverter();
