@@ -52,7 +52,7 @@ module.exports = function () {
     ecrm:P15_was_influenced_by
     <https://w3id.org/giuseppe-raimondi-lod/pub-text/paul-valery-monsieur-teste-1927> ;
     ecrm:P3_has_note
-    "Test note." .
+    "The newspaper article 'Mostro a due Teste' by Giuseppe Raimondi (in «Corriere della Sera», 28 ottobre 1971), was influence by Paul Valéry's 'Préface pour une nouvelle traduction de La Soiréè avec M. Teste' (in «Commerce», 1925, n. 4). Supporting evidence for this connection is provided by the presence of handwritten annotations by Giuseppe Raimondi on his copy of the 'Préface' (BIFICLIT, FR PER COMMER 1925, p. 100). Such annotations read 'Mostri, prodotti dei pensieri' and 'Idee mostri'. The article title 'Mostro a due Teste' is a possible reworking of these notes." .
 
     <https://w3id.org/giuseppe-raimondi-lod/pub-text/giuseppe-raimondi-mostro-a-due-teste-1971> rdfs:label "Giuseppe Raimondi, Mostro a due teste, 1971" .
     <https://w3id.org/giuseppe-raimondi-lod/pub-text/paul-valery-monsieur-teste-1927> rdfs:label "Paul Valéry, Monsieur Teste, 1927" .

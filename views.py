@@ -6,7 +6,7 @@ import uuid
 views = Blueprint(__name__, "views")
 
 """ endpoint """
-endpoint = "http://10.60.32.94:9999/blazegraph/sparql"
+endpoint = "http://10.60.35.187:9999/blazegraph/sparql"
 sparql = SPARQLWrapper(endpoint)
 
 """ query """
@@ -69,6 +69,9 @@ def index():
     return render_template("index.html")
 
 """ raimondi """
+
+""" METTI COME SOGGETTO CREATION """
+
 @views.route("/raimondi")
 def raimondi():
     
@@ -85,7 +88,7 @@ def raimondi():
     for result in raimondiResults["results"]["bindings"]:
         uuidID = uuid.uuid4()
         id = str(uuidID)
-        authorDict[result["text"]["value"]] = {"id": id, "title": result["title"]["value"], "pubdate": result["pubdate"]["value"], "author": result["author"]["value"]}
+        authorDict[result["creation"]["value"]] = {"id": id, "title": result["title"]["value"], "pubdate": result["pubdate"]["value"], "author": result["author"]["value"]}
 
     """ influencing authors works """
     """ convert data into JSON """

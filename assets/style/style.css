@@ -51,11 +51,7 @@ main {
 }
 
 .res-section {
-  height: 45%;
   overflow-y: scroll;
-}
-
-.res-section {
   scrollbar-width: auto;
   scrollbar-color: #F0F0F0 #FFF;
 }
@@ -250,10 +246,6 @@ main {
 /* cards */
 .card-w-500 {
   max-width: 500px;
-}
-
-.card-45 {
-  height: 45%;
 }
 
 /* textarea */
