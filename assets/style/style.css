@@ -258,3 +258,12 @@ textarea {
 .arrow::after {
   content: "\0362";
 }
+
+/* rdf */
+.res-triple div {
+  margin-bottom: 20px;
+}
+
+[data-punctuation='check'] p {
+  display: inline;
+}

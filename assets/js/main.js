@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", () => {
   checkDeviceW();
   selectTripleComp();
   expandAbbreviations();
-  rdfData();
   confirmData();
 });
 
@@ -101,6 +100,7 @@ let selectTripleComp = () => {
 
           /* pass the variables to submit */
           document.querySelector(".submit-triple").setAttribute("data-object", uriArr.join("___"));
+          document.querySelector(".submit-triple").setAttribute("data-bibl-object", biblArr.join("___"));
 
         } else {
           /* SUBJECT */
@@ -109,6 +109,7 @@ let selectTripleComp = () => {
 
           /* pass the variables to submit */
           document.querySelector(".submit-triple").setAttribute("data-subject", uri);
+          document.querySelector(".submit-triple").setAttribute("data-bibl-subject", biblStr);
         };
 
       });
@@ -171,109 +172,6 @@ let blockSaveBtn = () => {
     saveBtn.setAttribute("disabled", "disabled");
   };
 
-};
-
-/* save data for rdf generation */
-let rdfData = () => {
-  /* click on submit buttons */
-  var submits = document.querySelectorAll(".submit-triple");
-  submits.forEach((submit) => {
-    submit.addEventListener("click", () => {
-
-      /* triple values */
-      var subject = submit.getAttribute("data-subject");
-      var predicateSelect = document.querySelector(".select-predicate");
-      var objects = submit.getAttribute("data-object").split("___");
-
-      /* triple rdf components */
-      var rdfSubject = document.querySelector("[data-type='triple'][data-role='subject']");
-      var rdfPredicate = document.querySelector("[data-type='triple'][data-role='predicate']");
-      var rdfObject = document.querySelector("[data-type='triple'][data-role='object']");
-
-      /* subject */
-      if (subject !== null) {
-        rdfSubject.innerHTML = "&#x3c;" + subject + "&#x3e;";
-      } else {
-        rdfSubject.innerHTML = "";
-      };
-
-      /* predicate */
-      var predicate = predicateSelect.options[predicateSelect.selectedIndex].text;
-      var prefix = predicateSelect.options[predicateSelect.selectedIndex].getAttribute("data-prefix");
-      rdfPredicate.innerHTML = prefix + predicate;
-
-      /* object */
-      if (objects.length > 1) {
-        rdfObject.innerHTML = "";
-        objects.forEach((object) => {
-          rdfObject.innerHTML += "<span>" + "&#x3c;" + object + "&#x3e;" + "</span>";
-        });
-      } else if (objects.length = 1) {
-        rdfObject.innerHTML = "";
-        objects.forEach((object) => {
-          if (object == "") {
-            rdfObject.innerHTML = "";
-          } else {
-            rdfObject.innerHTML += "<span>" + "&#x3c;" + object + "&#x3e;" + "</span>";
-          };
-        });
-      };
-
-      /* NOTE */
-      var note = document.querySelector(".scholarly-note").value;
-      var rdfPredicateNote = document.querySelector("[data-type='triple'][data-role='predicate-note']");
-      var rdfObjectNote = document.querySelector("[data-type='triple'][data-role='object-note']");
-      if (note !== "") {
-        rdfPredicateNote.innerHTML = "ecrm:P3_has_note";
-        rdfObjectNote.innerHTML = "<span>" + '"' + note + '"' + "</span>";
-      } else {
-        rdfPredicateNote.innerHTML = "";
-        rdfObjectNote.innerHTML = "";
-      };
-
-      /* PUNCTUATION */
-      var objsToDivide = document.querySelectorAll("[data-punctuation='check'] span");
-      var objsToDivideLen = objsToDivide.length - 1;
-      var lastObj = objsToDivide[objsToDivideLen];
-
-      objsToDivide.forEach((obj) => {
-        /* NOTE */
-        if (obj.parentNode.getAttribute("data-role") == "object-note") {
-          obj.classList.add("rdf-full-stop");
-        } else {
-          /* OTHER OBJECTS */
-          /* if more than one object */
-          /* if the next element sibling is empty */
-          /* add ; to all the objects except the last that is assigned with . */
-          if (obj.parentNode.nextElementSibling.innerHTML == "") {
-            if (obj.parentNode.children.length > 1) {
-              obj.classList.add("rdf-semicolon");
-              lastObj.classList.remove("rdf-semicolon");
-              lastObj.classList.add("rdf-full-stop");
-            } else {
-              obj.classList.add("rdf-full-stop");
-            };
-          } else {
-            /* if the next element sibling is not empty */
-            /* add ; to all the objects */
-            obj.classList.add("rdf-semicolon");
-          };
-        };
-      });
-
-      /* NATURAL LANGUAGE */
-      /* show natural language res */
-      document.querySelector(".res-natural-lang p").classList.remove("d-none");
-
-      /* block/unblock save/confirm/cancel button */
-      var saveBtn = document.querySelector(".submit-triple");
-      var confirmBtn = document.querySelector(".btn-confirm");
-      var cancelBtn = document.querySelector(".btn-cancel");
-      confirmBtn.removeAttribute("disabled");
-      cancelBtn.removeAttribute("disabled");
-      saveBtn.setAttribute("disabled", "disabled");
-    });
-  });
 };
 
 /* confirm data */
