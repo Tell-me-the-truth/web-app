@@ -63,15 +63,30 @@ raimondiInfluencingquery = """
     }
 """
 
+""" repim """
+repimWorks = """ 
+    PREFIX dcterm: <http://purl.org/dc/terms/>
+    PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    PREFIX repim: <http://repim.unibo.it/sm/>
+    PREFIX crm: <http://erlangen-crm.org/current/>
+    PREFIX frbroo: <http://erlangen-crm.org/efrbroo/>
+    #?con = WorkConception ?work ?title ?pubdate ?author 
+    select * {
+        ?con <http://erlangen-crm.org/current/P94_has_created>	?work.
+        ?work rdfs:label ?title.
+        ?con <http://erlangen-crm.org/current/P14_carried_out_by>/rdfs:label ?author.
+        ?con <http://erlangen-crm.org/current/P4_has_time-span>/<http://erlangen-crm.org/current/P78_is_identified_by>/rdfs:label ?date.
+    }
+"""
+
 """ homepage """
 @views.route("/")
 def index():
     return render_template("index.html")
 
 """ raimondi """
-
-""" METTI COME SOGGETTO CREATION """
-
 @views.route("/raimondi")
 def raimondi():
     
@@ -104,3 +119,23 @@ def raimondi():
         influencersDict[result["text"]["value"]] = {"id": id, "title": result["title"]["value"], "pubdate": result["pubdate"]["value"], "author": result["author"]["value"]}
 
     return render_template("raimondi.html", authorDict = authorDict, influencersDict = influencersDict)
+
+""" repim """
+@views.route("/repim")
+def repim():
+    """ repim works """
+    """ convert data into JSON """
+    sparql = SPARQLWrapper(endpoint)
+    sparql.setTimeout(55)
+    sparql.setQuery(repimWorks)
+    sparql.setReturnFormat(JSON)
+    repimResults =  sparql.query().convert()
+
+    """ repim works dict """
+    repimWorksDict = {}
+    for result in repimResults["results"]["bindings"]:
+        uuidID = uuid.uuid4()
+        id = str(uuidID)
+        repimWorksDict[result["work"]["value"]] = {"id": id, "title": result["title"]["value"], "pubdate": result["date"]["value"], "author": result["author"]["value"]}
+
+    return render_template("repim.html", repimWorksDict = repimWorksDict)

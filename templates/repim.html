@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Paolo Bonora, Martina Dello Buono, Francesca Giovannetti, Francesca Tomasi">
+    <title>Tell me the truth</title>
+    <link href="/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/style/style.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/assets/img/favicon.ico">
+</head>
+
+<body>
+    <main class="d-flex flex-nowrap">
+        <!-- texts -->
+        <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-secondary bg-gradient bg-opacity-25 lw-3">
+            <!-- sidebar -->
+            <a class="hamburger fs-3 text-dark text-center" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list"
+                    viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+                </svg>
+            </a>
+            <div class="offcanvas offcanvas-start" data-bs-backdrop="static" tabindex="-1" id="offcanvasWithBothOptions"
+                aria-labelledby="offcanvasWithBothOptionsLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Tell me the truth</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <div class="list-group mb-4">
+                        <a href="/" class="list-group-item list-group-item-action">Home</a>
+                        <a href="#" class="list-group-item list-group-item-action">Introduction</a>
+                    </div>
+                    <div>
+                        <h6>Knowledge bases</h6>
+                    </div>
+                    <div class="list-group">
+                        <a href="/raimondi" class="list-group-item list-group-item-action" aria-current="true">Giuseppe
+                            Raimondi
+                            LOD</a>
+                        <a href="#" class="list-group-item list-group-item-action active">RePIM</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- tell me the truth environment -->
+        <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-secondary bg-gradient bg-opacity-75 lw-19">
+            <div class="d-flex align-items-center flex-shrink-0 p-3 text-white text-decoration-none border-bottom">
+                <button type="button" class="btn btn-sm btn-texts btn-circle me-2"><i class="bi bi-x-lg"></i></button>
+                <span class="fs-5">1. Select <span><i class="bi bi-arrow-right"></i></span> a text</span>
+            </div>
+            <!-- starting author -->
+            <div class="list-group list-group-flush border-bottom scrollarea">
+
+                <div class="list-group-item py-3 lh-sm" aria-current="true">
+                    <div class="col-10 mb-1 small form-check">
+                        <div class="form-check">
+                            <input class="form-check-input select-txt" type="radio" id='' data-uri='' data-author=''
+                                data-title='' data-datapub='' data-triple="subject" name="selectSubject">
+                            <label class="form-check-label" for=''>
+                                <b></b>, <i></i>, <span></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- relations -->
+        <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-light lw-50">
+            <div class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark">
+                <button type="button" class="btn btn-sm btn-relations btn-circle me-2"><i
+                        class="bi bi-x-lg"></i></button>
+                <span class="fs-5">2. Annotate <span><i class="bi bi-arrow-right"></i></span> Relations between
+                    <button type="button" class="btn btn-secondary triple-comp subject">subject</button>
+                    and
+                    <button type="button" class="btn btn-secondary triple-comp object">object</button>
+            </div>
+            <hr>
+            <!-- set triple -->
+            <div class="container-fluid mb-3">
+                <div class="row">
+                    <div class="col-md-3 text-start">
+                        <h6>Subject</h6>
+                        <p class="triple-comp subject text-secondary">Select a text from the left sidebar.</p>
+                    </div> <!-- insert subject -->
+                    <div class="col-md-3 text-center">
+                        <div class="arrow">Predicate</div>
+                    </div> <!-- insert predicate -->
+                    <div class="col-md-3 text-end">
+                        <h6>Object</h6>
+                        <p class="triple-comp object text-secondary">Select a text from the list below.</p>
+                    </div> <!-- insert object -->
+                    <div class="col-md-3 text-end">
+                        <button class="btn btn-sm btn-relations caret" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseExample" aria-expanded="true"
+                            aria-controls="collapseExample">List</button>
+                    </div>
+                </div>
+            </div>
+            <!-- related texts -->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="collapse bg-white p-3 rounded fade show" id="collapseExample">
+
+                            <div class="form-check">
+                                <input class="form-check-input select-txt" type="checkbox" id='' data-uri=''
+                                    data-author='' data-title='' data-datapub='' data-triple="object">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    <b></b>, <i></i>, <span></span>
+                                </label>
+                                <button type="button" class="btn btn-sm btn-relations">Metadata</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- related texts -->
+            <div class="container-fluid mb-3 p-3">
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <div class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark">
+                            <span class="fs-5">Relation type</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- set relation -->
+                <div class="row mb-3">
+                    <div class="col-md-3 text-start">
+                        <h6>Subject</h6>
+                        <p class="triple-comp subject text-secondary">Select a text from the left sidebar.</p>
+                    </div> <!-- insert subject -->
+                    <div class="col-md-3 text-center">
+                        <!-- select the rdf serialization -->
+                        <div class="arrow mb-2">Predicate</div>
+                        <select class="form-select form-select-sm select-predicate" aria-label=".form-select-sm"
+                            data-triple="predicate">
+                            <option value="was_influenced_by" data-prefix="ecrm:P15_">was_influenced_by</option>
+                        </select>
+                    </div> <!-- insert predicate -->
+                    <div class="col-md-3 text-end">
+                        <h6>Object</h6>
+                        <p class="triple-comp object text-secondary">Select a text from the list below.</p>
+                    </div> <!-- insert object -->
+                </div>
+                <!-- critical note -->
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <div class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark">
+                            <span class="fs-5">Scholarly note</span>
+                        </div>
+                        <div class="mt-2">
+                            <textarea class="form-control d-block scholarly-note"
+                                placeholder="Insert scholarly note..."></textarea>
+                        </div>
+                    </div>
+                </div>
+                <!-- submit -->
+                <div>
+                    <button type="submit" class="btn btn-relations submit-triple" disabled>Save</button>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- graph -->
+        <div class="d-flex flex-column flex-shrink-0 bg-secondary bg-gradient bg-opacity-25 lw-3">
+            <div class="d-flex align-items-center p-3 section-closed text-rotate">
+                <button type="button" class="btn btn-sm btn-graph btn-circle me-2"><i
+                        class="bi bi-arrows-fullscreen"></i></button>
+                <span class="fs-5">Graph</span>
+            </div>
+        </div>
+
+        <!-- interpretation -->
+        <div class="d-flex flex-column flex-shrink-0 p-3 bg-secondary bg-gradient bg-opacity-75 lw-25">
+            <div class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white">
+                <button type="button" class="btn btn-sm btn-primary btn-circle me-2"><i class="bi bi-x-lg"></i></button>
+                <span class="fs-5">3. Confirm <span><i class="bi bi-arrow-right"></i></span> Interpretation</span>
+            </div>
+            <hr>
+            <!-- rdf -->
+            <div class="card card-45 mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">RDF</h5>
+                    <!-- select the rdf serialization -->
+                    <select class="form-select form-select-sm" aria-label=".form-select-sm">
+                        <option selected>Turtle</option>
+                    </select>
+                    <!-- rdf result -->
+                    <div class="res-section text-bg-light my-3 p-3 res-triple">
+                        <div data-type="triple" data-role="prefix">@prefix ecrm:
+                            &#x3c;http://erlangen-crm.org/current/&#x3e; .</div>
+                        <div class="d-none" data-type="triple" data-role="prefix">@prefix rdfs:
+                            &#x3c;http://www.w3.org/2000/01/rdf-schema#&#x3e; .</div>
+                        <div class="d-none" data-type="triple" data-role="prefix">@prefix xsd:
+                            &#x3c;http://www.w3.org/2001/XMLSchema#&#x3e; .</div>
+                        <div data-type="triple" data-role="subject"></div>
+                        <div data-type="triple" data-role="predicate"></div>
+                        <div data-type="triple" data-role="object" data-punctuation="check"></div>
+                        <div data-type="triple" data-role="predicate-note"></div>
+                        <div data-type="triple" data-role="object-note" data-punctuation="check"></div>
+
+                        <!-- uri / rdf label -->
+                        <div class="d-none" data-type="triple" data-role="subject-rdf-label"></div>
+                        <div class="d-none" data-type="triple" data-role="object-rdf-label"></div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- interpretation result -->
+            <div class="card card-45 mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Natural language</h5>
+                    <!-- rdf result -->
+                    <div class="res-section text-bg-light my-3 p-3 res-natural-lang">
+                        <!-- insert the natural language triple -->
+                        <p>Here is the generated RDF.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- confirm -->
+            <div class="">
+                <button type="button" class="btn btn-primary btn-confirm" disabled>Confirm</button>
+                <button type="button" class="btn btn-secondary btn-cancel" disabled>Cancel</button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- script -->
+    <script type="text/javascript" src="/assets/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="/assets/js/main.js"></script>
+
+    <!-- webpack -->
+    <script src="/assets/js/_bundle.js"></script>
+
+</body>
+
+</html>
