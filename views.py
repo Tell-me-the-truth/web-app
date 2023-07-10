@@ -132,10 +132,10 @@ def repim():
     repimResults =  sparql.query().convert()
 
     """ repim works dict """
-    repimWorksDict = {}
+    authorDict = {}
     for result in repimResults["results"]["bindings"]:
         uuidID = uuid.uuid4()
         id = str(uuidID)
-        repimWorksDict[result["work"]["value"]] = {"id": id, "title": result["title"]["value"], "pubdate": result["date"]["value"], "author": result["author"]["value"]}
+        authorDict[result["work"]["value"]] = {"id": id, "title": result["title"]["value"], "pubdate": result["date"]["value"], "author": result["author"]["value"]}
 
-    return render_template("repim.html", repimWorksDict = repimWorksDict)
+    return render_template("repim.html", authorDict = authorDict)

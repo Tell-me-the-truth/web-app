@@ -48,8 +48,6 @@
                 </div>
             </div>
         </div>
-
-
         <!-- tell me the truth environment -->
         <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-secondary bg-gradient bg-opacity-75 lw-19">
             <div class="d-flex align-items-center flex-shrink-0 p-3 text-white text-decoration-none border-bottom">
@@ -58,22 +56,25 @@
             </div>
             <!-- starting author -->
             <div class="list-group list-group-flush border-bottom scrollarea">
-
+                {% for key in authorDict %}
                 <div class="list-group-item py-3 lh-sm" aria-current="true">
                     <div class="col-10 mb-1 small form-check">
                         <div class="form-check">
-                            <input class="form-check-input select-txt" type="radio" id='' data-uri='' data-author=''
-                                data-title='' data-datapub='' data-triple="subject" name="selectSubject">
-                            <label class="form-check-label" for=''>
-                                <b></b>, <i></i>, <span></span>
+                            <input class="form-check-input select-txt" type="radio" id='{{ authorDict[key]["id"] }}'
+                                data-uri='{{ key }}' data-author='{{ authorDict[key]["author"] }}'
+                                data-title='{{ authorDict[key]["title"] }}'
+                                data-datapub='{{ authorDict[key]["pubdate"] }}' data-triple="subject"
+                                name="selectSubject">
+                            <label class="form-check-label" for='{{ authorDict[key]["id"] }}'>
+                                <b>{{ authorDict[key]["author"] }}</b>, <i>{{ authorDict[key]["title"] }}</i>, <span>{{
+                                    authorDict[key]["pubdate"] }}</span>
                             </label>
                         </div>
                     </div>
                 </div>
+                {% endfor %}
             </div>
         </div>
-
-
         <!-- relations -->
         <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-light lw-50">
             <div class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark">
@@ -111,16 +112,20 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="collapse bg-white p-3 rounded fade show" id="collapseExample">
-
+                            {% for key in authorDict %}
                             <div class="form-check">
-                                <input class="form-check-input select-txt" type="checkbox" id='' data-uri=''
-                                    data-author='' data-title='' data-datapub='' data-triple="object">
+                                <input class="form-check-input select-txt" type="checkbox"
+                                    id='{{ authorDict[key]["id"] }}' data-uri='{{ key }}'
+                                    data-author='{{ authorDict[key]["author"] }}'
+                                    data-title='{{ authorDict[key]["title"] }}'
+                                    data-datapub='{{ authorDict[key]["pubdate"] }}' data-triple="object">
                                 <label class="form-check-label" for="flexCheckDefault">
-                                    <b></b>, <i></i>, <span></span>
+                                    <b>{{ authorDict[key]["author"] }}</b>, <i>{{ authorDict[key]["title"]
+                                        }}</i>, <span>{{ authorDict[key]["pubdate"] }}</span>
                                 </label>
                                 <button type="button" class="btn btn-sm btn-relations">Metadata</button>
                             </div>
-
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
