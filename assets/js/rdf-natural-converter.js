@@ -22,6 +22,10 @@ let rdfData = () => {
          var rdfPredicate = document.querySelector("[data-type='triple'][data-role='predicate']");
          var rdfObject = document.querySelector("[data-type='triple'][data-role='object']");
 
+         /* N3 */
+         var resN3 = document.querySelector(".res-n3 .add-triple");
+         resN3.innerHTML = "";
+
          /* subject */
          if (subject !== null) {
             rdfSubject.innerHTML = "&#x3c;" + subject + "&#x3e;";
@@ -39,6 +43,8 @@ let rdfData = () => {
             rdfObject.innerHTML = "";
             objects.forEach((object) => {
                rdfObject.innerHTML += "<p>" + "<span class='object-comp'>" + "&#x3c;" + "<span class='object-uri'>" + object + "</span>" + "&#x3e;" + "</span>" + "<span class='object-punct'></span>" + "</p>";
+               /* N3 */
+               resN3.innerHTML += "&#x3c;" + subject + "&#x3e;" + " " + prefix + predicate + " " + "&#x3c;" + object + "&#x3e;" + " .";
             });
          } else if (objects.length = 1) {
             rdfObject.innerHTML = "";
@@ -47,6 +53,8 @@ let rdfData = () => {
                   rdfObject.innerHTML = "";
                } else {
                   rdfObject.innerHTML += "<p>" + "<span class='object-comp'>" + "&#x3c;" + "<span class='object-uri'>" + object + "</span>" + "&#x3e;" + "</span>" + "<span class='object-punct'></span>" + "</p>";
+                  /* N3 */
+                  resN3.innerHTML += "&#x3c;" + subject + "&#x3e;" + " " + prefix + predicate + " " + "&#x3c;" + object + "&#x3e;" + " .";
                };
             });
          };
@@ -58,6 +66,8 @@ let rdfData = () => {
          if (note !== "") {
             rdfPredicateNote.innerHTML = "ecrm:P3_has_note";
             rdfObjectNote.innerHTML = "<p>" + '"' + note + '"' + "<span class='object-punct'></span>" + "</p>";
+            /* N3 */
+            resN3.innerHTML += "&#x3c;" + subject + "&#x3e;" + " ecrm:P3_has_note " + "&#x3c;" + note + "&#x3e;" + " .";
          } else {
             rdfPredicateNote.innerHTML = "";
             rdfObjectNote.innerHTML = "";
@@ -100,16 +110,14 @@ let rdfData = () => {
 
          /* URI / RDF LABEL */
          /* subject */
-         var subjectUri = document.querySelector("[data-role='subject-rdf-label']");
          var htmlObject = document.createElement("div");
          htmlObject.innerHTML = subjectBibl;
          subjectBibl = htmlObject.textContent;
-         subjectUri.innerHTML = "&#x3c;" + subject + "&#x3e;" + " rdfs:label " + '"' + subjectBibl + '"' + " .";
+
+         /* N3 */
+         resN3.innerHTML += "&#x3c;" + subject + "&#x3e;" + " rdfs:label " + '"' + subjectBibl + '"' + " .";
 
          /* object */
-         var objectUri = document.querySelector("[data-role='object-rdf-label']");
-
-         /* TRYING */
          /* object dict */
          var objectsDict = [];
          objects.forEach((obj) => {
@@ -136,16 +144,14 @@ let rdfData = () => {
          };
 
          /* print rdf */
-         objectUri.innerHTML = "";
-
          for (var i = 0; i < combined.length; i++) {
-            objectUri.innerHTML += "&#x3c;" + combined[i]["uri"] + "&#x3e;" + " rdfs:label " + '"' + combined[i]["bibl"] + '"' + " .";
+            /* N3 */
+            resN3.innerHTML += "&#x3c;" + combined[i]["uri"] + "&#x3e;" + " rdfs:label " + '"' + combined[i]["bibl"] + '"' + " .";
          };
-         /* / */
 
          /* NATURAL LANGUAGE */
          /* show natural language res */
-         var rdfTriple = document.querySelector(".res-triple").textContent.trim();
+         var rdfTriple = document.querySelector(".res-n3").textContent.trim();
 
          /*
             Author: Andrea Schimmenti

@@ -213,11 +213,19 @@
             <div data-type="triple" data-role="object" data-punctuation="check"></div>
             <div data-type="triple" data-role="predicate-note"></div>
             <div data-type="triple" data-role="object-note" data-punctuation="check"></div>
-
             <!-- uri / rdf label -->
             <div class="d-none" data-type="triple" data-role="subject-rdf-label"></div>
             <div class="d-none" data-type="triple" data-role="object-rdf-label"></div>
-
+          </div>
+          <!-- rdf for converting into natural language -->
+          <div class="res-n3 bg-secondary text-light d-none">
+            <div data-type="triple" data-role="prefix">@prefix ecrm:
+              &#x3c;http://erlangen-crm.org/current/&#x3e; .</div>
+            <div class="" data-type="triple" data-role="prefix">@prefix rdfs:
+              &#x3c;http://www.w3.org/2000/01/rdf-schema#&#x3e; .</div>
+            <div class="" data-type="triple" data-role="prefix">@prefix xsd:
+              &#x3c;http://www.w3.org/2001/XMLSchema#&#x3e; .</div>
+            <div class="add-triple"></div>
           </div>
         </div>
       </div>
