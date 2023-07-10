@@ -36,7 +36,7 @@ raimondiWorksquery = """
     
         ?creation efrbroo:R17_created ?text .
         
-    }
+    } order by asc(UCASE(str(?author)))
 """
 
 raimondiInfluencingquery = """
@@ -60,7 +60,7 @@ raimondiInfluencingquery = """
         ?author_uri pro:holdsRoleInTime ?rit ;
                     rdfs:label ?author . FILTER (!regex(?author, "Giuseppe Raimondi","i")) . 
         ?title_uri rdf:value ?title .       
-    }
+    } order by asc(UCASE(str(?author)))
 """
 
 """ repim """
@@ -78,7 +78,7 @@ repimWorks = """
         ?work rdfs:label ?title.
         ?con <http://erlangen-crm.org/current/P14_carried_out_by>/rdfs:label ?author.
         ?con <http://erlangen-crm.org/current/P4_has_time-span>/<http://erlangen-crm.org/current/P78_is_identified_by>/rdfs:label ?date.
-    }
+    } order by asc(UCASE(str(?author)))
 """
 
 """ homepage """
