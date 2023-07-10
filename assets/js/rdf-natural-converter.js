@@ -152,6 +152,8 @@ let rdfData = () => {
          /* NATURAL LANGUAGE */
          /* show natural language res */
          var rdfTriple = document.querySelector(".res-n3").textContent.trim();
+         
+         console.log(rdfTriple);
 
          /*
             Author: Andrea Schimmenti
