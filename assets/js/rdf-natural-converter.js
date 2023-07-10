@@ -100,28 +100,45 @@ let rdfData = () => {
 
          /* URI / RDF LABEL */
          /* subject */
-         /* var subjectUri = document.querySelector("[data-role='subject-rdf-label']");
+         var subjectUri = document.querySelector("[data-role='subject-rdf-label']");
          var htmlObject = document.createElement("div");
          htmlObject.innerHTML = subjectBibl;
          subjectBibl = htmlObject.textContent;
-         subjectUri.innerHTML = "&#x3c;" + subject + "&#x3e;" + " rdfs:label " + '"' + subjectBibl + '"' + " ."; */
+         subjectUri.innerHTML = "&#x3c;" + subject + "&#x3e;" + " rdfs:label " + '"' + subjectBibl + '"' + " .";
 
          /* object */
-         /* var objects = document.querySelectorAll("[data-role='object'] span");
          var objectUri = document.querySelector("[data-role='object-rdf-label']");
-         var objectsList = [];
 
-         objects.forEach((object) => {
-            if (!objectsList.includes(object.textContent)) {
-               objectsList.push(object.textContent);
-            };
+         /* TRYING */
+         /* object dict */
+         var objectsDict = [];
+         objects.forEach((obj) => {
+            objectsDict.push({
+               join: obj
+            });
          });
 
+         /* bibl object dict */
+         var objectBiblDict = [];
+         objectBibl.split("___").forEach((bibl) => {
+            objectBiblDict.push({
+               join: bibl
+            });
+         });
+
+         /* combined dict */
+         var combined = [];
+         for (var i = 0; i < objectsDict.length; i++) {
+            combined[i] = { uri: objectsDict[i].join, bibl: objectBiblDict[i].join };
+         };
+
+         /* print rdf */
          objectUri.innerHTML = "";
-         
-         objectsList.forEach((object) => {
-            objectUri.innerHTML += "&#x3c;" + object + "&#x3e;" + " rdfs:label " + '"' + "BIBL" + '"' + " .";
-         });         */
+
+         for (var i = 0; i < combined.length; i++) {
+            objectUri.innerHTML += "&#x3c;" + combined[i]["uri"] + "&#x3e;" + " rdfs:label " + '"' + combined[i]["bibl"] + '"' + " .";
+         };
+         /* / */
 
          /* NATURAL LANGUAGE */
          /* show natural language res */
@@ -177,17 +194,13 @@ let rdfData = () => {
          // Call the async function and store the result
          parseRdfGraph(rdfGraph)
             .then(graphStrings => {
-               console.log('Parsing complete!');
                parsedGraph = graphStrings;
-               console.log(parsedGraph);
                let text = findTemplates(parsedGraph);
-               console.log(text);
 
                /* print in the natural language section */
                var naturalLangRes = document.querySelector(".res-natural-lang p");
                naturalLangRes.innerHTML = "";
                naturalLangRes.innerHTML = text;
-
             })
             .catch(error => {
                console.error('Error parsing RDF graph:', error);
