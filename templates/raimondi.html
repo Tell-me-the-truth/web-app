@@ -111,15 +111,21 @@
             <div class="collapse bg-white p-3 rounded fade show" id="collapseExample">
               {% for key in influencersDict %}
               <div class="form-check">
-                <input class="form-check-input select-txt" type="checkbox" id='{{ influencersDict[key]["id"] }}'
-                  data-uri='{{ key }}' data-author='{{ influencersDict[key]["author"] }}'
-                  data-title='{{ influencersDict[key]["title"] }}' data-datapub='{{ influencersDict[key]["pubdate"] }}'
-                  data-triple="object">
-                <label class="form-check-label" for="flexCheckDefault">
-                  <b>{{ influencersDict[key]["author"] }}</b>, <i>{{ influencersDict[key]["title"] }}</i>, <span>{{
-                    influencersDict[key]["pubdate"] }}</span>
-                </label>
-                <button type="button" class="btn btn-sm btn-relations">Metadata</button>
+                <div class="row">
+                  <div class="col-md-10">
+                    <input class="form-check-input select-txt" type="checkbox" id='{{ influencersDict[key]["id"] }}'
+                      data-uri='{{ key }}' data-author='{{ influencersDict[key]["author"] }}'
+                      data-title='{{ influencersDict[key]["title"] }}'
+                      data-datapub='{{ influencersDict[key]["pubdate"] }}' data-triple="object">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      <b>{{ influencersDict[key]["author"] }}</b>, <i>{{ influencersDict[key]["title"] }}</i>, <span>{{
+                        influencersDict[key]["pubdate"] }}</span>
+                    </label>
+                  </div>
+                  <div class="col-md-2">
+                    <button type="button" class="btn btn-sm btn-relations">Metadata</button>
+                  </div>
+                </div>
               </div>
               {% endfor %}
             </div>
@@ -196,9 +202,12 @@
           </select>
           <!-- rdf result -->
           <div class="res-section text-bg-light my-3 p-3 res-triple">
-            <div data-type="triple" data-role="prefix">@prefix ecrm: &#x3c;http://erlangen-crm.org/current/&#x3e; .</div>
-            <div class="d-none" data-type="triple" data-role="prefix">@prefix rdfs: &#x3c;http://www.w3.org/2000/01/rdf-schema#&#x3e; .</div>
-            <div class="d-none" data-type="triple" data-role="prefix">@prefix xsd: &#x3c;http://www.w3.org/2001/XMLSchema#&#x3e; .</div>
+            <div data-type="triple" data-role="prefix">@prefix ecrm: &#x3c;http://erlangen-crm.org/current/&#x3e; .
+            </div>
+            <div class="d-none" data-type="triple" data-role="prefix">@prefix rdfs:
+              &#x3c;http://www.w3.org/2000/01/rdf-schema#&#x3e; .</div>
+            <div class="d-none" data-type="triple" data-role="prefix">@prefix xsd:
+              &#x3c;http://www.w3.org/2001/XMLSchema#&#x3e; .</div>
             <div data-type="triple" data-role="subject"></div>
             <div data-type="triple" data-role="predicate"></div>
             <div data-type="triple" data-role="object" data-punctuation="check"></div>

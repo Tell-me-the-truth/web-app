@@ -111,19 +111,25 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="collapse bg-white p-3 rounded fade show" id="collapseExample">
+                        <div class="list-scroller collapse bg-white p-3 rounded fade show" id="collapseExample">
                             {% for key in authorDict %}
                             <div class="form-check">
-                                <input class="form-check-input select-txt" type="checkbox"
-                                    id='{{ authorDict[key]["id"] }}' data-uri='{{ key }}'
-                                    data-author='{{ authorDict[key]["author"] }}'
-                                    data-title='{{ authorDict[key]["title"] }}'
-                                    data-datapub='{{ authorDict[key]["pubdate"] }}' data-triple="object">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    <b>{{ authorDict[key]["author"] }}</b>, <i>{{ authorDict[key]["title"]
-                                        }}</i>, <span>{{ authorDict[key]["pubdate"] }}</span>
-                                </label>
-                                <button type="button" class="btn btn-sm btn-relations">Metadata</button>
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <input class="form-check-input select-txt" type="checkbox"
+                                            id='{{ authorDict[key]["id"] }}' data-uri='{{ key }}'
+                                            data-author='{{ authorDict[key]["author"] }}'
+                                            data-title='{{ authorDict[key]["title"] }}'
+                                            data-datapub='{{ authorDict[key]["pubdate"] }}' data-triple="object">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            <b>{{ authorDict[key]["author"] }}</b>, <i>{{ authorDict[key]["title"]
+                                                }}</i>, <span>{{ authorDict[key]["pubdate"] }}</span>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button type="button" class="btn btn-sm btn-relations">Metadata</button>
+                                    </div>
+                                </div>
                             </div>
                             {% endfor %}
                         </div>
@@ -176,8 +182,6 @@
                 </div>
             </div>
         </div>
-
-
         <!-- graph -->
         <div class="d-flex flex-column flex-shrink-0 bg-secondary bg-gradient bg-opacity-25 lw-3">
             <div class="d-flex align-items-center p-3 section-closed text-rotate">
@@ -186,7 +190,6 @@
                 <span class="fs-5">Graph</span>
             </div>
         </div>
-
         <!-- interpretation -->
         <div class="d-flex flex-column flex-shrink-0 p-3 bg-secondary bg-gradient bg-opacity-75 lw-25">
             <div class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white">
