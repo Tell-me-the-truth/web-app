@@ -121,6 +121,9 @@ let rdfData = () => {
          /* bibl object dict */
          var objectBiblDict = [];
          objectBibl.split("___").forEach((bibl) => {
+            var htmlObject = document.createElement("div");
+            htmlObject.innerHTML = bibl;
+            bibl = htmlObject.textContent;
             objectBiblDict.push({
                join: bibl
             });
@@ -173,20 +176,7 @@ let rdfData = () => {
          }
 
          // RDF graph in Cidoc-CRM
-         const rdfGraph = `
-            @prefix ecrm: <http://erlangen-crm.org/current/> .
-            @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-            @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-      
-            <https://w3id.org/giuseppe-raimondi-lod/pub-text/giuseppe-raimondi-mostro-a-due-teste-1971>
-            ecrm:P15_was_influenced_by
-            <https://w3id.org/giuseppe-raimondi-lod/pub-text/paul-valery-monsieur-teste-1927> ;
-            ecrm:P3_has_note
-            "The newspaper article 'Mostro a due Teste' by Giuseppe Raimondi (in «Corriere della Sera», 28 ottobre 1971), was influence by Paul Valéry's 'Préface pour une nouvelle traduction de La Soiréè avec M. Teste' (in «Commerce», 1925, n. 4). Supporting evidence for this connection is provided by the presence of handwritten annotations by Giuseppe Raimondi on his copy of the 'Préface' (BIFICLIT, FR PER COMMER 1925, p. 100). Such annotations read 'Mostri, prodotti dei pensieri' and 'Idee mostri'. The article title 'Mostro a due Teste' is a possible reworking of these notes." .
-      
-            <https://w3id.org/giuseppe-raimondi-lod/pub-text/giuseppe-raimondi-mostro-a-due-teste-1971> rdfs:label "Giuseppe Raimondi, Mostro a due teste, 1971" .
-            <https://w3id.org/giuseppe-raimondi-lod/pub-text/paul-valery-monsieur-teste-1927> rdfs:label "Paul Valéry, Monsieur Teste, 1927" .
-         `;
+         const rdfGraph = rdfTriple;
 
          // Store the result in a variable for later use
          let parsedGraph;
