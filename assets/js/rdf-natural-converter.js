@@ -67,7 +67,7 @@ let rdfData = () => {
             rdfPredicateNote.innerHTML = "ecrm:P3_has_note";
             rdfObjectNote.innerHTML = "<p>" + '"' + note + '"' + "<span class='object-punct'></span>" + "</p>";
             /* N3 */
-            resN3.innerHTML += "&#x3c;" + subject + "&#x3e;" + " ecrm:P3_has_note " + "&#x3c;" + note + "&#x3e;" + " .";
+            resN3.innerHTML += "&#x3c;" + subject + "&#x3e;" + " ecrm:P3_has_note " + '"' + note.replace(/"/g, "") + '"' + " .";
          } else {
             rdfPredicateNote.innerHTML = "";
             rdfObjectNote.innerHTML = "";
