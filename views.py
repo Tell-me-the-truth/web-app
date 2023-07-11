@@ -6,7 +6,7 @@ import uuid
 views = Blueprint(__name__, "views")
 
 """ endpoint """
-endpoint = "http://10.60.32.57:9999/blazegraph/sparql"
+endpoint = "http://172.20.10.3:9999/blazegraph/sparql"
 sparql = SPARQLWrapper(endpoint)
 
 """ query """
